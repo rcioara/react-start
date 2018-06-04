@@ -7,7 +7,8 @@ class App extends Component {
     persons: [
       {id: 1, name: 'Max', age: '30'},
       {id: 2, name: 'Roxi', age: '28'}
-    ]
+    ],
+    showPersons: false
   };
 
   switchNameHandler = (newName) => {
@@ -24,27 +25,47 @@ class App extends Component {
     ]});
   }
 
+  togglePersonsHandler = () => {
+    this.setState({showPersons: !this.state.showPersons});
+  }
+
+  deletePersonHandler= (idx) => {
+     // const persons = this.state.persons.slice(); // just copy the array
+      const persons = [...this.state.persons];
+      persons.splice(idx,1);
+      this.setState({persons: persons});
+  }
+
   render() {
+
     const style = {
       backgroundColor: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px'
     }
+
+    let btnText = 'Show Persons';
+    let persons = null;
+
+    if(this.state.showPersons){
+      persons = (this.state.persons.map((el, index) => {
+        return ( <Person click={() => this.deletePersonHandler(index)} 
+                         key={index}
+                         name={el.name}
+                         age={el.age} 
+                         change={this.changeNameHandler}/>)
+        }));
+      btnText = 'Hide Persons';
+    }
+   
     return (
       <div className="App">
         <h1>Hi! I'm a react app</h1>
         <button style={style} 
-                onClick={this.switchNameHandler.bind(this, 'Maxzxc!')}>
-                Switch name
+                onClick={this.togglePersonsHandler}>{btnText}    
         </button>
-        {this.state.persons.map(el => {
-          return ( <Person click={this.switchNameHandler.bind(this, 'Max!')} 
-                           key={el.id}
-                           name={el.name}
-                           age={el.age} 
-                           change={this.changeNameHandler}/>)
-          })}
+        {persons}
       </div>
     );
   }
