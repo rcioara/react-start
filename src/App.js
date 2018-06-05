@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.css';
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
   state = {
@@ -43,11 +44,13 @@ class App extends Component {
 
     if (this.state.showPersons) {
       persons = (this.state.persons.map((el, index) => {
-        return (<Person click={() => this.deletePersonHandler(index)}
-          key={el.id}
-          name={el.name}
-          age={el.age}
-          change={(event) => this.changeNameHandler(event, index)} />)
+        return (
+          <ErrorBoundary key={el.id}>
+            <Person click={() => this.deletePersonHandler(index)}
+              name={el.name}
+              age={el.age}
+              change={(event) => this.changeNameHandler(event, index)} />
+          </ErrorBoundary>);
       }));
       btnText = 'Hide Persons';
       btnClass = classes.red;
