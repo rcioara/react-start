@@ -2,7 +2,7 @@
     text-align: center;
   }
 
-.Cockpit button {
+.Button {
         background-color: green;
         color: white;
         font: inherit;
@@ -12,17 +12,17 @@
     
 }
       
-.Cockpit button:hover {
+.Button:hover {
 background-color: lightgreen;
 color: black;
 }
 
-.Cockpit button.red {
+.Button.red {
 background-color: red;
 color: black;
 }
 
-.Cockpit button.red:hover {
+.Button.red:hover {
 background-color: salmon;
 color: black;
 }
