@@ -23,13 +23,19 @@ class App extends Component {
     persons: [
       {id: 1, name: 'Max', age: '30', username: 'max'},
       {id: 2, name: 'Roxi', age: '28', username: 'roxi'},
-      {id: 2, name: 'Oana', age: '29', username: 'oana'},
+      {id: 3, name: 'Oana', age: '29', username: 'oana'},
     ],
     showPersons: false,
+    toggleClicked: 0,
   };
 
   togglePersonsHandler = () => {
-    this.setState ({showPersons: !this.state.showPersons});
+    this.setState ((prevState, props) => {
+      return {
+        showPersons: !this.state.showPersons,
+        toggleClicked: prevState.toggleClicked + 1,
+      };
+    });
   };
 
   deletePersonHandler = idx => {

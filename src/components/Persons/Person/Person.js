@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import classes from './Person.css';
 import Aux from '../../../hoc/Aux';
 import withClass from '../../../hoc/withClass';
+import PropTypes from 'prop-types';
 
 class Person extends Component {
   constructor (props) {
@@ -15,6 +16,7 @@ class Person extends Component {
 
   componentDidMount () {
     console.log ('[Person.js] - Inside componentDidMount() method');
+    this.inputElement.focus ();
   }
 
   render () {
@@ -33,6 +35,9 @@ class Person extends Component {
           years old
         </p>
         <input
+          ref={inp => {
+            this.inputElement = inp;
+          }}
           type="text"
           onChange={this.props.change}
           value={this.props.name}
@@ -42,4 +47,10 @@ class Person extends Component {
   }
 }
 
+Person.propTypes = {
+  click: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.string,
+  changed: PropTypes.func,
+};
 export default withClass (Person, classes.Person);
