@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import classes from './../components/Cockpit/Cockpit.css';
 import Persons from './../components/Persons/Persons';
 import Cockpit from './../components/Cockpit/Cockpit';
-import WithClass from '../hoc/WithClass';
+import Aux from '../hoc/Aux';
+import withClass from '../hoc/withClass';
 
 class App extends Component {
   constructor (props) {
@@ -66,16 +67,16 @@ class App extends Component {
     }
 
     return (
-      <WithClass classes={classes.Cockpit}>
+      <Aux>
         <Cockpit
           persons={this.state.persons}
           showPersons={this.state.showPersons}
           clicked={this.togglePersonsHandler}
         />
         {persons}
-      </WithClass>
+      </Aux>
     );
   }
 }
 
-export default App;
+export default withClass (App, classes.Cockpit);
